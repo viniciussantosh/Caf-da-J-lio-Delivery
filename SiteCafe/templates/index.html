@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café da Júlio | Website</title>
+    <link rel="stylesheet" href="/static/css/style-index.css">
+    <link rel="icon" href="/static/images/Logo.png" type="image/png">
+</head>
+<body>
+
+
+<section class="img-fundo">
+    <!--NavBar-->
+    <header>
+        <nav class="navbar section-content">
+            <a href="#" class="nav-logo">
+                <h2 class="logo-text">☕</h2>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">🏚️</a>
+                </li>
+                <li class="nav-item">
+                    <a href="menu.html" class="nav-link">Cardápio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contato.html" class="nav-link">Contato</a>
+                </li>
+                <li class="nav-item">
+                    <a href="create_account.html" class="nav-link">Crie sua Conta</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!--Hero?-->
+    <section class="hero-section">
+        <div class="section-content">
+            <div class="hero-details">
+                <h2 class="title">Café da Júlio</h2>
+                <h3 class="subtitle"> Melhore seu dia com um bom Café</h3>
+                <p class="description">Venda de Alimentos</p>
+                <a href="https://www.google.com.br/maps/@-29.2306935,-51.3450684,3a,90y,206.27h,78.42t/data=!3m7!1e1!3m5!1sYfWe4Dn-05PpSe3SUehqBQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D11.581894687822782%26panoid%3DYfWe4Dn-05PpSe3SUehqBQ%26yaw%3D206.2693616403144!7i16384!8i8192?hl=pt-BR&entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D" class="local">R. Júlio de Castilhos, 651</a>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="/static/images/Logo.png" alt="Hero" class="hero-image">
+            </div>
+        </div>
+    </section>
+</section>
+    
+
+    <!--Pag Principal-->
+    <main>    
+        <section class="ofertas-section">
+            <div class="section-content">
+                <h2 class="ofertas-title">Ofertas ☕</h2>
+                <div class="ofertas-grid">
+                    <div class="ofertas-item">
+                        <img src="/static/images/1.jpg" alt="Café Expresso">
+                        <h3>Café Expresso</h3>
+                        <p>R$ 6,00</p>
+                        <span class="disponivel">Disponível ✅</span>
+                    </div>
+                    <div class="ofertas-item">
+                        <img src="/static/images/2.jpeg" alt="Capuccino">
+                        <h3>Capuccino</h3>
+                        <p>R$ 8,50</p>
+                        <span class="disponivel">Disponível ✅</span>
+                    </div>
+                    <div class="ofertas-item">
+                        <img src="/static/images/3.png" alt="Pão de Queijo">
+                        <h3>Pão de Queijo</h3>
+                        <p>R$ 5,00</p>
+                        <span class="disponivel">Disponível ✅</span>
+                    </div>
+                    <div class="ofertas-item">
+                        <img src="/static/images/4.png" alt="Croissant">
+                        <h3>Croissant</h3>
+                        <p>R$ 7,00</p>
+                        <span class="disponivel">Disponível ✅</span>
+                    </div>
+                    <div class="ofertas-item">
+                        <img src="/static/images/item.jpeg" alt="Bolo de Chocolate">
+                        <h3>Bolo de Chocolate</h3>
+                        <p>R$ 9,00</p>
+                        <span class="disponivel">Disponível ✅</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+
+
+    <!--Sign Up-->
+    <form id="formCadastro">
+        <div class="sign" id="tela_c">
+            <div class="header-sign">
+                <h2 class="cadastro">Sign Up</h2>
+            </div>
+            <input type="text" name="name" class="log" placeholder="Nome">
+            <input type="email" name="email" class="log" placeholder="Email">
+            <input type="number" name="age" class="log" placeholder="Idade">
+            <input type="password" name="password" class="log" placeholder="Senha">
+            <input type="password" name="confirmPassword" class="log" placeholder="Confirmar Senha">
+            <button type="submit" class="submit">Cadastrar</button>
+    
+            <p class="ask">Já tem uma conta? </p>
+            <a class="entrar" id="entrarConta" onclick="telaLogin()" style="color: blue; cursor: pointer;">Entre</a>
+        </div>
+    </form>
+    
+    <!--Login-->
+    <form id="formLogin">
+        <div class="login" id="tela_l" style="display: none;">
+            <div class="header-login">
+                <h2 class="cadastro">Login</h2>
+            </div>
+            <input type="email" class="log" placeholder="Email">
+            <input type="password" class="log" placeholder="Senha">
+            <button type="submit" class="submit">Entrar</button>
+        </div>
+    </form>
+
+</body>
+
+
+<!--Rodapé-->
+<footer>
+    <div class="footer-info">
+        <p class="end-foot">651 R. Júlio de Castilhos Farroupilha, Rio Grande do Sul</p>
+        <p class="end-foot">Café da Júlio, Desde 2014</p>
+    </div>
+    <div class="formacontato">
+        <a href="#" class="linkface"> <img src="/static/images/face.png" alt="Facebook" class="face"></a>
+        <a href="https://www.instagram.com/cafedajulioo/" class="linkinsta"> <img src="/static/images/Insta.png" alt="Instagram" class="insta"></a>
+    </div>
+</footer>
+
+
+<!--Scripts-->
+<script src="/templates/script/script.js"></script>
+
+</html>
