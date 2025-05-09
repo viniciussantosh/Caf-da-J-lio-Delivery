@@ -110,4 +110,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=10000, threaded=True)  # Porta 10000 é a padrão do Render
