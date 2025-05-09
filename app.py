@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 app = Flask(__name__)
 app.secret_key = 'chave_secreta_super_segura'
@@ -33,6 +34,9 @@ def init_db():
 init_db()
 
 
+@app.route('/health')
+def health():
+    return "OK", 200
 
 @app.route('/')
 def home():
@@ -119,4 +123,5 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000, threaded=True)  # Porta 10000 é a padrão do Render
+    port = int(os.environ.get('PORT', 10000))  # Use a porta do Render
+    app.run(host='0.0.0.0', port=port)
