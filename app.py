@@ -6,6 +6,14 @@ app = Flask(__name__)
 app.secret_key = 'chave_secreta_super_segura'
 app.config['DATABASE'] = 'users.db'
 
+
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.wrappers import Response
+
+app.wsgi_app = DispatcherMiddleware(Response("Carregando...", status=202), {
+    '/': app.wsgi_app
+})
+
 def get_db_connection():
     conn = sqlite3.connect(app.config['DATABASE'])
     conn.row_factory = sqlite3.Row
@@ -23,6 +31,7 @@ def init_db():
         conn.commit()
 
 init_db()
+
 
 
 @app.route('/')
