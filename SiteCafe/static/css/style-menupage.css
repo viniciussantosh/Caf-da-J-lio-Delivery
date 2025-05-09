@@ -4,11 +4,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", "sans-serif";
+    
 }
 
 ::-webkit-scrollbar {
     display: none;
-  }
+}
 
 /* Cores e tamanhos padrões*/
 :root {
@@ -42,13 +43,15 @@
     --site-max-width: 1300px;
 }
 
-
-
 /* Style padrão site */
 ul {
     list-style: none;
 }
 a {
+    text-decoration: none;
+}
+a, a:visited, a:hover, a:active {
+    color: var(--white-color);
     text-decoration: none;
 }
 button {
@@ -100,8 +103,9 @@ header .navbar {
 }
 #search-menu {
     font-size: var(--font-size-s);
+    color: #252525;
     height: 40px;
-    width: 500px;
+    width: 400px;
 }
 .nav-logo .logo-text .logo-simples {
     max-width: 70px;

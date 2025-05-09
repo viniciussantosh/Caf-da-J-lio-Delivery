@@ -8,7 +8,7 @@
 
 ::-webkit-scrollbar {
     display: none;
-  }
+}
 
 /* Cores e tamanhos padrões*/
 :root {
@@ -49,6 +49,10 @@ ul {
     list-style: none;
 }
 a {
+    text-decoration: none;
+}
+a, a:visited, a:hover, a:active {
+    color: var(--white-color);
     text-decoration: none;
 }
 button {

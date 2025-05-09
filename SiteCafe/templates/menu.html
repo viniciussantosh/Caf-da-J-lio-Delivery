@@ -10,25 +10,25 @@
 </head>
 <header>
     <nav class="navbar section-content">
-        <a href="" class="nav-logo">
-            <h2 class="logo-text"><img src="/static/images/logo-simples.png" alt="logo-simples" class="logo-simples"></h2>
+        <a href="{{ url_for('home') }}" class="nav-logo">
+            <h2 class="logo-text">☕ Café da Júlio</h2>
         </a>
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="index.html" class="nav-link">🏚️</a>
-            </li>
+            <li class="nav-item"><a href="{{ url_for('contato') }}" class="nav-link">Contato</a></li>
+            {% if session.get('user') %}
+                <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link">Minha Conta</a></li>
+                <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Sair</a></li>
+            {% else %}
+                <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link active">Login</a></li>
+                <li class="nav-item"><a href="{{ url_for('create_account') }}" class="nav-link">Cadastre-se</a></li>
+            {% endif %}
             <li class="nav-item">
                 <input type="text" name="text" id="search-menu" class="nav-link" placeholder="Pesquise">
             </li>
-            
         </ul>
     </nav>
 </header>
-<body>
-    <main> 
-        
-    </main>
-</body>
+
 <div id="root"></div>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>

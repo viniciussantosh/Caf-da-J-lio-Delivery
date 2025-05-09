@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contatos</title>
-    <link rel="stylesheet" href="/static/css/style-contato.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-contato.css') }}">
 </head>
+<header>
+    <nav class="navbar section-content">
+        <a href="{{ url_for('home') }}" class="nav-logo">
+            <h2 class="logo-text">☕ Café da Júlio</h2>
+        </a>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link">🏚️ Início</a></li>
+            <li class="nav-item"><a href="{{ url_for('cardapio') }}" class="nav-link">Cardápio</a></li>
+            <li class="nav-item"><a href="{{ url_for('contato') }}" class="nav-link">Contato</a></li>
+            {% if session.get('user') %}
+                <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link">Minha Conta</a></li>
+                <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Sair</a></li>
+            {% else %}
+                <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link active">Login</a></li>
+                <li class="nav-item"><a href="{{ url_for('create_account') }}" class="nav-link">Cadastre-se</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
 <body>
     <a href="" class="wpp"><img src="/static/images/Insta.png" alt="." class="wpp-img"></a>
 </body>

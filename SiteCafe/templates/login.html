@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Café da Júlio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginpage-style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo-simples.png') }}" type="image/png">
+</head>
+<body>
+    <section class="img-fundo">
+        <header>
+            <nav class="navbar section-content">
+                <a href="{{ url_for('home') }}" class="nav-logo">
+                    <h2 class="logo-text">☕ Café da Júlio</h2>
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link">🏚️ Início</a></li>
+                    <li class="nav-item"><a href="{{ url_for('cardapio') }}" class="nav-link">Cardápio</a></li>
+                    <li class="nav-item"><a href="{{ url_for('contato') }}" class="nav-link">Contato</a></li>
+                    {% if session.get('user') %}
+                        <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link">Minha Conta</a></li>
+                        <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Sair</a></li>
+                    {% else %}
+                        <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link active">Login</a></li>
+                        <li class="nav-item"><a href="{{ url_for('create_account') }}" class="nav-link">Cadastre-se</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+    </section>
+    <div class="login-container">
+        <div class="login-form">
+            <h1>Login</h1>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email" name="email" required>
+                    <i class="fa fa-envelope"></i>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Senha" name="password" required>
+                    <i class="fa fa-lock"></i>
+                </div>
+                <button type="submit" class="log-btn">Entrar</button>
+            </form>
+            
+            <div class="login-footer">
+                <p>Não tem uma conta? <a href="{{ url_for('create_account') }}">Cadastre-se</a></p>
+                <p><a href="#">Esqueceu sua senha?</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

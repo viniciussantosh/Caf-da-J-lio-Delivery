@@ -1,23 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Café da Júlio - Delícias como café, bolos e pães direto no coração de Farroupilha.">
+    <meta name="author"  content="Café da Júlio">
+    <title>Café da Júlio | Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginpage-style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo-simples.png') }}" type="image/png">
+</head>
+<body>
+
+<section class="img-fundo">
+    <!--NavBar-->
+    <header>
+        <nav class="navbar section-content">
+            <a href="{{ url_for('home') }}" class="nav-logo">
+                <h2 class="logo-text">☕ Café da Júlio</h2>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ url_for('cardapio') }}" class="nav-link">Cardápio</a></li>
+                <li class="nav-item"><a href="{{ url_for('contato') }}" class="nav-link">Contato</a></li>
+                {% if session.get('user') %}
+                    <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link">Minha Conta</a></li>
+                    <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Sair</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link active">Login</a></li>
+                    <li class="nav-item"><a href="{{ url_for('create_account') }}" class="nav-link">Cadastre-se</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
 <link rel="stylesheet" href="/static/css/loginpage-style.css">
-  <div class="login-form">
+<div class="login-form">
     <h1>Login</h1>
-    <div class="form-group ">
-      <input type="text" class="form-control" placeholder="Username" id="UserName" name="name">
-      <i class="fa fa-user"></i>
+    <form method="POST" action="{{ url_for('create_account') }}">
+    <div class="form-group">
+        <input type="text" name="name" placeholder="Nome completo" required>
     </div>
-    <div class="form-group ">
-      <input type="text" class="form-control" placeholder="Idade" id="UserName" name="age">
-      <i class="fa fa-user"></i>
+    <div class="form-group">
+        <input type="number" name="age" placeholder="Idade" required>
     </div>
-    <div class="form-group ">
-      <input type="text" class="form-control" placeholder="Email" id="UserName" name="email">
-      <i class="fa fa-user"></i>
+    <div class="form-group">
+        <input type="email" name="email" placeholder="Email" required>
     </div>
-    <div class="form-group log-status">
-      <input type="password" class="form-control" placeholder="Password" id="Passwod" name="password">
-      <i class="fa fa-lock"></i>
+    <div class="form-group">
+        <input type="password" name="password" placeholder="Senha" required>
     </div>
-    <button type="button" class="log-btn" onclick="login()"><a href="index.html">Log in</a></button>
-    
-  </div>
-  <script src="/templates/script/loginpage-script.js"></script>
+    <button type="submit">Cadastrar</button>
+</form>
+</div>
+<script src="{{ url_for('static', filename='script/loginpage-script.js') }}"></script>
