@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - Café da Júlio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carrinho.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar section-content">
+            <a href="{{ url_for('home') }}" class="nav-logo">
+                <h2 class="logo-text">☕ Café da Júlio</h2>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ url_for('cardapio') }}" class="nav-link">Cardápio</a></li>
+                {% if session.get('user') %}
+                    <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link">Minha Conta</a></li>
+                    <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Sair</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link">Login</a></li>
+                    <li class="nav-item"><a href="{{ url_for('create_account') }}" class="nav-link">Cadastre-se</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main class="carrinho-container section-content">
+        <div class="carrinho-header">
+            <h1 class="carrinho-title">Seu Carrinho</h1>
+            <a href="{{ url_for('cardapio') }}" class="continuar-comprando">Continuar Comprando</a>
+        </div>
+        
+        {% if not carrinho_itens %}
+            <div class="carrinho-vazio">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Seu carrinho está vazio</p>
+                <a href="{{ url_for('cardapio') }}" class="btn-primario">Ver Cardápio</a>
+            </div>
+        {% else %}
+            <div class="carrinho-itens">
+                <div class="carrinho-labels">
+                    <span>Item</span>
+                    <span>Preço</span>
+                    <span>Ação</span>
+                </div>
+                
+                <ul class="lista-itens">
+                    {% for item in carrinho_itens %}
+                    <li class="item-carrinho">
+                        <span class="item-nome">{{ item['item'] }}</span>
+                        <span class="item-preco">{{ item['preco'] }}</span>
+                        <form action="{{ url_for('remover_item', index=loop.index0) }}" method="POST" class="form-remover">
+                            <button type="submit" class="remover-btn">
+                                <i class="fas fa-trash-alt"></i> Remover
+                            </button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+                
+                <div class="total-container">
+                    <div class="total-info">
+                        <span>Subtotal:</span>
+                        <span class="subtotal">R$ {{ "%.2f"|format(total) }}</span>
+                    </div>
+                    <div class="total-info">
+                        <span>Taxa de Entrega:</span>
+                        <span class="taxa-entrega">Grátis</span>
+                    </div>
+                    <div class="total-info total-geral">
+                        <span>Total:</span>
+                        <span class="total">R$ {{ "%.2f"|format(total) }}</span>
+                    </div>
+                    
+                    <button class="finalizar-btn btn-primario">
+                        <i class="fas fa-credit-card"></i> Finalizar Compra
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-info">
+            <p>Café da Júlio © 2024 - Todos os direitos reservados</p>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/carrinho.js') }}"></script>
+</body>
+</html>

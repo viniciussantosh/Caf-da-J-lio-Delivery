@@ -15,8 +15,12 @@
     <!--NavBar-->
     <header>
         <nav class="navbar section-content">
-            <a href="{{ url_for('home') }}" class="nav-logo">
-                <h2 class="logo-text">☕ Café da Júlio</h2>
+            <div class="logo-container">
+                <a href="{{ url_for('home') }}">
+                    
+                    <h2 class="logo-text"><img src="{{ url_for('static', filename='images/Logo.png') }}" alt="Logo" class="logo-img">Café da Júlio</h2>
+                </a>
+            </div>
             </a>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="{{ url_for('cardapio') }}" class="nav-link">Cardápio</a></li>
@@ -57,7 +61,7 @@
             <h2 class="ofertas-title">Ofertas ☕</h2>
             <div class="ofertas-grid">
                 <div class="ofertas-item">
-                    <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Café Expresso">
+                    <img src="{{ url_for('static', filename='images/.jpg') }}" alt="Café Expresso">
                     <h3>Café Expresso</h3>
                     <p>R$ 6,00</p>
                     <span class="disponivel">Disponível ✅</span>
@@ -93,18 +97,6 @@
 
 <!--Rodapé-->
 <footer>
-    <div class="footer-info">
-        <p class="end-foot">651 R. Júlio de Castilhos Farroupilha, Rio Grande do Sul</p>
-        <p class="end-foot">Café da Júlio, Desde 2014</p>
-    </div>
-    <div class="formacontato">
-        <a href="#" class="linkface">
-            <img src="{{ url_for('static', filename='images/face.png') }}" alt="Facebook" class="face">
-        </a>
-        <a href="https://www.instagram.com/cafedajulioo/" class="linkinsta">
-            <img src="{{ url_for('static', filename='images/Insta.png') }}" alt="Instagram" class="insta">
-        </a>
-    </div>
 </footer>
 
 <!--Scripts-->

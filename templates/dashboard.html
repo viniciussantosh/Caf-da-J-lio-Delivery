@@ -1,4 +1,69 @@
-<h1>Cadastro Finalizado</h1>
-<a href="{{ url_for('home') }}" class="nav-logo">
-    <h2 class="logo-text">☕ Café da Júlio</h2>
-</a>
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Meu Perfil</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar section-content">
+                <a href="{{ url_for('home') }}" class="nav-logo">
+                    <h2 class="logo-text">☕ Café da Júlio</h2>
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="{{ url_for('cardapio') }}" class="nav-link">Cardápio</a></li>
+                    <li class="nav-item"><a href="{{ url_for('contato') }}" class="nav-link">Contato</a></li>
+                </ul>
+            </nav>
+        </header>
+        {% block content %}
+        <div class="profile-container">
+            <div class="profile-header">
+                <h1><i class="fas fa-user-circle"></i> Meu Perfil</h1>
+                <a href="{{ url_for('logout') }}" class="logout-btn" style="color: black;">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </a>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                    <img src="{{ url_for('static', filename='images/pfppic.png') }}" alt="pic-profile" style="opacity: 80%;">
+                </div>
+                
+                <div class="profile-info">
+                    <div class="info-group">
+                        <label>Nome Completo</label>
+                        <p>{{ user['name'] }}</p>
+                    </div>
+                    
+                    <div class="info-group">
+                        <label>Idade</label>
+                        <p>{{ user['age'] }} anos</p>
+                    </div>
+                    
+                    <div class="info-group">
+                        <label>E-mail</label>
+                        <p>{{ user['email'] }}</p>
+                    </div>
+                    
+                    <div class="info-group">
+                        <label>ID do Usuário</label>
+                        <p>{{ user['id'] }}</p>
+                    </div>
+                </div>
+                
+                <div class="profile-actions">
+                    <a href="#" class="edit-btn">
+                        <i class="fas fa-edit"></i> Editar Perfil
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+</html>

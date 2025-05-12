@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ item }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/item.css') }}">
+</head>
+<header>
+        <nav class="navbar section-content">
+            <div class="logo-container">
+                <a href="{{ url_for('home') }}">
+                    
+                    <h2 class="logo-text"><img src="{{ url_for('static', filename='images/Logo.png') }}" alt="Logo" class="logo-img">Café da Júlio</h2>
+                </a>
+            </div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ url_for('cardapio') }}" class="nav-link">Cardápio</a></li>
+                <li class="nav-item"><a href="{{ url_for('contato') }}" class="nav-link">Contato</a></li>
+                {% if session.get('user') %}
+                    <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link">Minha Conta</a></li>
+                    <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Sair</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link active">Login</a></li>
+                    <li class="nav-item"><a href="{{ url_for('create_account') }}" class="nav-link">Cadastre-se</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+<body>
+
+    <main class="product-container">
+        <div class="product-image">
+            <img src="/static/images/{{ item }}.jpg" alt="{{ item }}">
+        </div>
+        <div class="product-details">
+            <h1>{{ item }}</h1>
+            <p class="product-price">R$ 6,00</p>
+            <p class="product-description">
+                Aqui vai uma descrição completa sobre o produto, incluindo seus ingredientes,
+                modo de preparo e detalhes adicionais.
+            </p>
+            <form action="{{ url_for('adicionar_carrinho') }}" method="POST">
+                <input type="hidden" name="item" value="{{ item }}">
+                <input type="hidden" name="preco" value="6.00">
+                <button type="submit">Adicionar ao Carrinho</button>
+            </form>
+
+        </div>
+    </main>
+</body>
+</html>

@@ -112,6 +112,20 @@ header .navbar {
     padding: 0 auto;
 }
 
+.carrinho-flutuante {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+
+}
+.carrinho-icon {
+    background-color: var(--primary-color);
+    width: 50px;
+    border-radius: 40%;
+    margin: 30px;
+    padding: 5px;
+    color: var(--secondary-color);
+}
 /* Estilo do Cardápio */
 .menu-section {
     padding: 40px 20px;

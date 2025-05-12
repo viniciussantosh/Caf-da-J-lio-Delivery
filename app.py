@@ -1,19 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
-import os
 
 app = Flask(__name__)
 app.secret_key = 'chave_secreta_super_segura'
 app.config['DATABASE'] = 'users.db'
-
-
-from werkzeug.middleware.dispatcher import DispatcherMiddleware
-from werkzeug.wrappers import Response
-
-app.wsgi_app = DispatcherMiddleware(Response("Carregando...", status=202), {
-    '/': app.wsgi_app
-})
 
 def get_db_connection():
     conn = sqlite3.connect(app.config['DATABASE'])
@@ -34,10 +25,6 @@ def init_db():
 init_db()
 
 
-@app.route('/health')
-def health():
-    return "OK", 200
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -49,6 +36,65 @@ def contato():
 @app.route('/cardapio')
 def cardapio():
     return render_template('menu.html')
+
+@app.route('/item/<sub_item>')
+def item_page(sub_item):
+    return render_template('item.html', item=sub_item)
+
+
+@app.route('/carrinho')
+def carrinho():
+    itens = session.get('carrinho', [])
+    
+    total = 0.0
+    for item in itens:
+        try:
+            preco = float(item['preco']) if not isinstance(item['preco'], (int, float)) else item['preco']
+            total += preco
+        except (TypeError, ValueError):
+            continue  # Ignora itens com preço inválido
+    
+    return render_template('carrinho.html', itens=itens, total=total)
+
+@app.route('/adicionar_carrinho', methods=['POST'])
+def adicionar_carrinho():
+    item = request.form.get('item')
+    preco = request.form.get('preco')
+    
+    if not item or not preco:
+        flash('Dados do produto incompletos', 'error')
+        return redirect(url_for('cardapio'))
+    
+    try:
+        preco_float = float(preco.replace('R$', '').strip().replace(',', '.'))
+    except ValueError:
+        flash('Formato de preço inválido', 'error')
+        return redirect(url_for('cardapio'))
+    
+    if 'carrinho' not in session:
+        session['carrinho'] = []
+    
+    session['carrinho'].append({
+        'item': item,
+        'preco': preco_float  
+    })
+    session.modified = True
+    
+    flash(f'{item} adicionado ao carrinho!', 'success')
+    return redirect(url_for('carrinho'))
+
+
+
+@app.route('/remover_item/<int:index>', methods=['POST'])
+def remover_item(index):
+    if 'carrinho' in session and 0 <= index < len(session['carrinho']):
+        item_removido = session['carrinho'].pop(index)
+        session.modified = True
+        flash(f'{item_removido["item"]} removido do carrinho', 'info')
+    return redirect(url_for('carrinho'))
+
+
+
 
 @app.route('/create_account', methods=['GET', 'POST'])
 def create_account():
@@ -74,6 +120,7 @@ def create_account():
             session['user'] = {
                 'id': cursor.lastrowid,
                 'name': name,
+                'age' : age,
                 'email': email
             }
             return redirect(url_for('dashboard'))
@@ -83,6 +130,8 @@ def create_account():
             return render_template('create_account.html')
     
     return render_template('create_account.html')
+
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -99,7 +148,8 @@ def login():
             session['user'] = {
                 'id': user['id'],
                 'name': user['name'],
-                'email': user['email']
+                'email': user['email'],
+                'age': user['age']
             }
             flash('Login realizado com sucesso!', 'success')
             return redirect(url_for('dashboard'))
@@ -121,7 +171,5 @@ def logout():
     flash('Você foi desconectado com sucesso.', 'info')
     return redirect(url_for('home'))
 
-
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 10000))  # Use a porta do Render
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=5000, debug=True)

@@ -114,6 +114,25 @@ header .navbar {
     opacity: 90%;
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    margin-bottom: -12px;
+}
+
+.logo-text {
+    font-size: 24px;
+    color: white;
+    margin: 0;
+}
+
+
 
 /* Hero */
 .hero-section {

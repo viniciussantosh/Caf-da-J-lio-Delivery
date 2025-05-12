@@ -1,31 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contatos</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-contato.css') }}">
+    <title>Contato - Café da Júlio</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style-contato.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
 </head>
-<header>
-    <nav class="navbar section-content">
-        <a href="{{ url_for('home') }}" class="nav-logo">
-            <h2 class="logo-text">☕ Café da Júlio</h2>
-        </a>
-        <ul class="nav-menu">
-            <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link">🏚️ Início</a></li>
-            <li class="nav-item"><a href="{{ url_for('cardapio') }}" class="nav-link">Cardápio</a></li>
-            <li class="nav-item"><a href="{{ url_for('contato') }}" class="nav-link">Contato</a></li>
-            {% if session.get('user') %}
-                <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link">Minha Conta</a></li>
-                <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Sair</a></li>
-            {% else %}
-                <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link active">Login</a></li>
-                <li class="nav-item"><a href="{{ url_for('create_account') }}" class="nav-link">Cadastre-se</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-</header>
 <body>
-    <a href="" class="wpp"><img src="/static/images/Insta.png" alt="." class="wpp-img"></a>
+    <header>
+        <nav class="navbar section-content">
+            <a href="{{ url_for('home') }}" class="nav-logo">
+                <h2 class="logo-text">☕</h2>
+            </a>
+        </nav>
+    </header>
+
+
+    <main class="contact-container">
+        <h1 class="contact-title">Fale Conosco</h1>
+        <p class="contact-subtitle">Estamos sempre prontos para atender você!</p>
+
+        <div class="contact-grid">
+            <!-- WhatsApp -->
+            <div class="contact-card">
+                <div class="contact-icon whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3>WhatsApp</h3>
+                <p>(54) 99133-0938</p>
+                <a href="https://wa.me/5554991330938" class="contact-btn" target="_blank">
+                    Enviar mensagem
+                </a>
+            </div>
+
+            <!-- Telefone -->
+            <div class="contact-card">
+                <div class="contact-icon phone">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <h3>Telefone</h3>
+                <p>(54) 9133-0938</p>
+                <a href="tel:+555491330938" class="contact-btn">
+                    Ligar agora
+                </a>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-card">
+                <div class="contact-icon email">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Email</h3>
+                <p>viniciushenriquesasi@gmail.com</p>
+                <a href="mailto:viniciushenriquesasi@gmail.com" class="contact-btn">
+                    Enviar email
+                </a>
+            </div>
+        </div>
+
+        <div class="social-media">
+            <h2>Nossas Redes Sociais</h2>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/cafedajulioo" class="social-icon" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/cafedajulio" class="social-icon" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-map">
+            <h2>Onde Estamos</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d983.9154709155423!2d-51.34520942135197!3d-29.230657885743135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951ea09db84b5e07%3A0xa587cd787430ef7c!2zQ2Fmw6kgZGEgSsO6bGlv!5e1!3m2!1spt-BR!2sbr!4v1746965315591!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"                   
+                    width="300%" 
+                    height="300" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy"></iframe>
+            </iframe>
+            <p class="address">
+                <i class="fas fa-map-marker-alt"></i>
+            </p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Café da Júlio © 2024 - Todos os direitos reservados</p>
+    </footer>
 </body>
 </html>
